@@ -1,6 +1,11 @@
-*.log
 /target
 /out
+
+./*.db
+./*.log
+./target
+./bin
+
 # Sensitive or high-churn files
 .idea/**/dataSources/
 .idea/**/dataSources.ids

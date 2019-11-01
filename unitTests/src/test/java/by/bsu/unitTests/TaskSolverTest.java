@@ -5,16 +5,11 @@ import org.junit.Rule;
 import org.junit.jupiter.api.Test;
 import static org.junit.Assert.*;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import org.junit.rules.ExpectedException;
 import com.tngtech.java.junit.dataprovider.DataProvider;
 import com.tngtech.java.junit.dataprovider.DataProviderRunner;
 import com.tngtech.java.junit.dataprovider.UseDataProvider;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
-
-import org.junit.jupiter.api.BeforeEach;
-
-import org.junit.runners.Parameterized;
 
 
 
@@ -95,9 +90,6 @@ public class TaskSolverTest {
                         () -> TaskSolver.isTriangle(Double.NaN, 4 ,5));
         assertEquals("One or more sides are equal to NaN", exception.getMessage());
     }
-
-
-
 
 
 //    @DataProvider
