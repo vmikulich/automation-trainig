@@ -12,76 +12,88 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.concurrent.TimeUnit;
 
-public class FormPage {
+public class FormPage extends AbstractPage{
     private final String PAGE_URL = "https://www.expedia.com/Cars";
     private final int WAIT_TIMEOUT_SECONDS = 40;
     private DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
     private DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("h:mm a");
 
-    private WebDriver driver;
 
     public FormPage(WebDriver driver) {
-        this.driver = driver;
+        super(driver);
         driver.get(PAGE_URL);
-        PageFactory.initElements(this.driver, this);
-        new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS);
+        PageFactory.initElements(driver, this);
     }
 
-    @FindBy(xpath = "//*[@id=\"car-pickup-clp\"]")
+    @Override
+    public FormPage openPage() {
+        webDriver.get(PAGE_URL);
+        webDriver.manage().timeouts().implicitlyWait(WAIT_TIMEOUT_SECONDS, TimeUnit.SECONDS);
+        return this;
+    }
+
+    @FindBy(xpath = "//[@id=\"car-pickup-clp\"]")
     private WebElement pickUpPlace;
 
-    @FindBy(xpath = "//*[@id=\"car-dropoff-clp\"]")
+    @FindBy(xpath = "//[@id=\"car-dropoff-clp\"]")
     private WebElement dropOffPlace;
 
-    @FindBy(xpath = "//*[@id=\"car-pickup-date-clp\"]")
+    @FindBy(xpath = "//[@id=\"car-pickup-date-clp\"]")
     private WebElement pickUpDate;
 
-    @FindBy(xpath = "//*[@id=\"car-dropoff-date-clp\"]")
+    @FindBy(xpath = "//[@id=\"car-dropoff-date-clp\"]")
     private WebElement dropOffDate;
 
-    @FindBy(xpath = "//*[@id=\"car-pickup-time-clp\"]")
+    @FindBy(xpath = "//[@id=\"car-pickup-time-clp\"]")
     private WebElement pickUpTime;
 
-    @FindBy(xpath = "//*[@id=\"car-dropoff-time-clp\"]")
+    @FindBy(xpath = "//[@id=\"car-dropoff-time-clp\"]")
     private WebElement dropOffTime;
 
-    @FindBy(xpath = "//*[@id=\"gcw-submit-car\"]")
+    @FindBy(xpath = "//[@id=\"gcw-submit-car\"]")
     private WebElement searchButton;
 
-    public void searchCar() {
+    private void searchCar() {
         searchButton.click();
     }
 
-    public void selectPickUpTime(LocalTime picTime) {
+    private FormPage selectPickUpTime(LocalTime picTime) {
         new Select(pickUpTime).selectByVisibleText(picTime.format(timeFormatter));
+        return this;
     }
 
-    public void selectDropOffTime(LocalTime dropTime) {
+    private FormPage selectDropOffTime(LocalTime dropTime) {
         new Select(dropOffTime).selectByVisibleText(dropTime.format(timeFormatter));
+        return this;
     }
 
-    public void inputPickUpPlace(String place) {
+    private FormPage inputPickUpPlace(String place) {
         pickUpPlace.clear();
         pickUpPlace.sendKeys(place);
+        return this;
     }
 
-    public void inputDropOffPlace(String place) {
+    private FormPage inputDropOffPlace(String place) {
         dropOffPlace.clear();
         dropOffPlace.sendKeys(place);
+        return this;
     }
 
-    public void inputPickUpDate(LocalDate date) {
+    private FormPage inputPickUpDate(LocalDate date) {
         pickUpDate.clear();
         pickUpDate.sendKeys(date.format(dateFormatter));
+        return this;
     }
 
-    public void inputDropOffDate(LocalDate date) {
+    private FormPage inputDropOffDate(LocalDate date) {
         dropOffDate.clear();
         dropOffDate.sendKeys(date.format(dateFormatter));
+        return this;
     }
 
-    public boolean isErrorMessgaeVisiable1() {
+    public boolean isErrorMessgaeVisiable1(WebDriver driver) {
         WebElement errorMessage =
                 new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS)
                         .until(ExpectedConditions
@@ -89,12 +101,28 @@ public class FormPage {
         return errorMessage.isDisplayed();
     }
 
-    public boolean isErrorMessgaeVisiable2() {
+    public boolean isErrorMessgaeVisiable2(WebDriver driver) {
         WebElement errorMessage =
                 new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS)
                         .until(ExpectedConditions
                                 .presenceOfElementLocated(By.xpath("//*[@id=\"wizard-errors\"]")));
         return errorMessage.isDisplayed();
+    }
+
+    public FormPage pickUpTimeIsAfterTheCurrentTime(String pickUpPlace, LocalDate pickUpDate, LocalDate dropOffDate) {
+        inputPickUpPlace(pickUpPlace);
+        inputPickUpDate(pickUpDate);
+        inputDropOffDate(dropOffDate);
+        searchCar();
+        return this;
+    }
+
+    public FormPage searchWithEmptyPickUpField(String EmptyPickUpPlace, LocalDate pickUpDate) {
+        inputPickUpPlace(EmptyPickUpPlace);
+        inputPickUpDate(pickUpDate);
+        inputDropOffDate(pickUpDate);
+        searchCar();
+        return this;
     }
 
 }

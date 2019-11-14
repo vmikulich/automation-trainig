@@ -16,33 +16,29 @@ public class FormPageTest {
     private final String pickUpPlace = "Minsk, Belarus (MSQ-Minsk Intl.)";
     private final String EmptyPickUpPlace = "";
     private final LocalDate pickUpDate = LocalDate.now();
+    private final LocalDate dropOffDate = LocalDate.now().plusDays(1);
     private final LocalTime currentTime = LocalTime.NOON;
 
     @BeforeClass
     public void browserSetUp() {
         driver = new EdgeDriver();
-        page = new FormPage(driver);
-        driver.manage().window().maximize();
+//        driver.manage().window().maximize();
     }
 
     @Test
     public void pickUpTimeIsAfterTheCurrentTime() {
-        page.inputPickUpPlace(pickUpPlace);
-        page.inputPickUpDate(pickUpDate);
-        page.inputDropOffDate(pickUpDate);
-//        page.selectPickUpTime(currentTime.plusHours(2));
-//        page.selectDropOffTime(currentTime.plusHours(2));
-        page.searchCar();
-        Assert.assertTrue(page.isErrorMessgaeVisiable2());
+        page = new FormPage(driver)
+                .openPage()
+                .pickUpTimeIsAfterTheCurrentTime(pickUpPlace, pickUpDate, dropOffDate);
+        Assert.assertTrue(page.isErrorMessgaeVisiable2(driver));
     }
 
     @Test
     public void searchWithEmptyPickUpField() {
-        page.inputPickUpPlace(EmptyPickUpPlace);
-        page.inputPickUpDate(pickUpDate);
-        page.inputDropOffDate(pickUpDate);
-        page.searchCar();
-        Assert.assertTrue(page.isErrorMessgaeVisiable1());
+        page = new FormPage(driver)
+                .openPage()
+                .searchWithEmptyPickUpField(EmptyPickUpPlace, pickUpDate);
+        Assert.assertTrue(page.isErrorMessgaeVisiable1(driver));
     }
 
     @AfterClass
