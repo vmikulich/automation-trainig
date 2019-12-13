@@ -32,24 +32,6 @@ public class CarReservationCreator {
     private static final LocalDate nowDate = LocalDate.now();
 
 
-//    public static CarReservation withNegativeRentalPeriodFromProperty() {
-//        return (new CarReservation())
-//                .setPlaceFrom(TestDataReader.getTestData(TESTDATA_CASE_1_PLACE_FROM))
-//                .setPlaceTo(TestDataReader.getTestData(TESTDATA_CASE_1_PLACE_TO))
-//                .setReservationDates(new ReservationDates(
-//                        getDateStringWithPlusDays(TESTDATA_CASE_1_PICK_UP_PLUS_DAYS),
-//                        getDateStringWithPlusDays(TESTDATA_CASE_1_RETURN_PLUS_DAYS)));
-//    }
-//
-//    public static CarReservation withRentalPeriodMoreThanYearFromProperty() {
-//        return (new CarReservation())
-//                .setPlaceFrom(TestDataReader.getTestData(TESTDATA_CASE_2_PLACE_FROM))
-//                .setPlaceTo(TestDataReader.getTestData(TESTDATA_CASE_2_PLACE_TO))
-//                .setReservationDates(new ReservationDates(
-//                        getDateStringWithPlusDays(TESTDATA_CASE_2_PICK_UP_PLUS_DAYS),
-//                        getDateStringWithPlusDays(TESTDATA_CASE_2_RETURN_PLUS_DAYS)));
-//    }
-//
     public static CarReservation withNotAvailablePlaceFromProperty() {
         return (new CarReservation())
                 .setPlaceFrom(TestDataReader.getTestData(TESTDATA_CASE_3_PLACE_FROM));
@@ -76,15 +58,6 @@ public class CarReservationCreator {
                         getDateStringWithPlusDays(TESTDATA_CASE_5_PICK_UP_PLUS_DAYS),
                         getDateStringWithPlusDays(TESTDATA_CASE_5_RETURN_PLUS_DAYS)));
     }
-//
-//    public static CarReservation withCurrentPickUpDateFromProperty() {
-//        return (new CarReservation())
-//                .setPlaceFrom(TestDataReader.getTestData(TESTDATA_CASE_4_PLACE_FROM))
-//                .setPlaceTo(TestDataReader.getTestData(TESTDATA_CASE_4_PLACE_TO))
-//                .setReservationDates(new ReservationDates(
-//                        getDateStringWithPlusDays(TESTDATA_CASE_4_PICK_UP_PLUS_DAYS),
-//                        getDateStringWithPlusDays(TESTDATA_CASE_4_RETURN_PLUS_DAYS)));
-//    }
 
     public static CarReservation withEmptyPickUpField() {
         return (new CarReservation())

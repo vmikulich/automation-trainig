@@ -16,8 +16,8 @@ public class PageErrorCreator {
 
     private static final String TESTDATA_CASE_6_EXPECTED_MESSAGE = "testdata.case6.expected.message";
 
-//    private static final String TESTDATA_CASE_7_EXPECTED_MESSAGE = "testdata.case7.expected.message";
-//    private static final String TESTDATA_CASE_10_EXPECTED_MESSAGE = "testdata.case10.expected.message";
+    private static final String TESTDATA_CASE_7_EXPECTED_MESSAGE = "testdata.case7.expected.message";
+
 
     public static PageError errorForEmptyPickUpFieldFromProperty() {
         return new PageError(TestDataReader.getTestData(TESTDATA_CASE_1_EXPECTED_MESSAGE));
@@ -47,19 +47,7 @@ public class PageErrorCreator {
         return new PageError(TestDataReader.getTestData(TESTDATA_CASE_6_EXPECTED_MESSAGE));
     }
 
-//    public static PageError errorForRentalPeriodMoreThanYearFromProperty() {
-//        return new PageError(TestDataReader.getTestData(TESTDATA_CASE_2_EXPECTED_MESSAGE));
-//    }
-//
-
-//
-//    public static PageError errorForCurrentPickUpDateFromProperty() {
-//        return new PageError(TestDataReader.getTestData(TESTDATA_CASE_4_EXPECTED_MESSAGE));
-//    }
-//
-
-//
-//    public static PageError errorForNotRegisteredEmailFromProperty() {
-//        return new PageError(TestDataReader.getTestData(TESTDATA_CASE_10_EXPECTED_MESSAGE));
-//    }
+    public static PageError errorForNotRegisteredEmailOrPasswordFromProperty() {
+        return new PageError(TestDataReader.getTestData(TESTDATA_CASE_7_EXPECTED_MESSAGE));
+    }
 }

@@ -1,5 +1,6 @@
 package by.bsu.expedia.page;
 
+import by.bsu.expedia.model.Account;
 import by.bsu.expedia.model.CarReservation;
 import by.bsu.expedia.model.PageError;
 import org.openqa.selenium.By;
@@ -80,7 +81,25 @@ public class FormPage extends AbstractPage{
     private WebElement InexistentPickUpPlaceError;
 
     @FindBy(xpath = "[@id=\"ember906\"]/div/h5")
-    private WebElement PickUpAndReturnPlacesAcrossContinentsError;
+    private WebElement pickUpAndReturnPlacesAcrossContinentsError;
+
+    @FindBy(xpath = "[@id=\"gss-signin-incorrect-email-or-password\"]")
+    private WebElement loginError;
+
+    @FindBy(xpath = "[@id=\"header-account-menu\"]")
+    private WebElement accountButton;
+
+    @FindBy(xpath = "[@id=\"account-signin\"]")
+    private WebElement signInButton;
+
+    @FindBy(xpath = "[@id=\"gss-signin-email\"]")
+    private WebElement emailInput;
+
+    @FindBy(xpath = "[@id=\"gss-signin-password\"]")
+    private WebElement passwordInput;
+
+    @FindBy(xpath = "//*[@id=\"gss-signin-submit\"]")
+    private WebElement loginButton;
 
 
     public void search() {
@@ -129,7 +148,6 @@ public class FormPage extends AbstractPage{
 
     private FormPage inputPickUpDate(String date) {
         pickUpDate.clear();
-//        pickUpDate.sendKeys(date.format(dateFormatter));
         pickUpDate.sendKeys(date);
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         LOGGER.info("Filled 'Pick-up date' field with " + date);
@@ -144,6 +162,29 @@ public class FormPage extends AbstractPage{
         LOGGER.info("Filled 'Pick-up date' field with " + date);
         focusAway();
         return this;
+    }
+
+    public void inputEmail(String email) {
+        emailInput.clear();
+        emailInput.sendKeys(email);
+        emailInput.submit();
+        LOGGER.info("Filled 'Email' field with " + email);
+        focusAway();
+    }
+
+    public void inputPassword(String password) {
+        passwordInput.clear();
+        passwordInput.sendKeys(password);
+        LOGGER.info("Filled 'Password' field with " + password);
+        focusAway();
+    }
+
+    public FormPage login(Account account) {
+        account.getEmail().ifPresent(this::inputEmail);
+        account.getPassword().ifPresent(this::inputPassword);
+        loginButton.click();
+        LOGGER.info("Clicked 'Sign in' button");
+        return new FormPage(driver);
     }
 
     public boolean checkEmptyPickUpPlaceFieldErrorMessage(PageError error) {
@@ -183,44 +224,14 @@ public class FormPage extends AbstractPage{
     }
 
     public boolean checkPickUpAndReturnPlacesAcrossContinentsErrorMessage(PageError error) {
-        return PickUpAndReturnPlacesAcrossContinentsError.isDisplayed()
-                && PickUpAndReturnPlacesAcrossContinentsError.getText().
+        return pickUpAndReturnPlacesAcrossContinentsError.isDisplayed()
+                && pickUpAndReturnPlacesAcrossContinentsError.getText().
                 contains(error.getErrorDescription());
     }
 
-
-
-
-//    public boolean isErrorMessgaeVisiable1(WebDriver driver) {
-//        WebElement errorMessage =
-//                new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS)
-//                        .until(ExpectedConditions
-//                                .presenceOfElementLocated(By.xpath("//*[@id=\"gcw-cars-form-clp\"]/div[2]")));
-//        return errorMessage.isDisplayed();
-//    }
-//
-//    public boolean isErrorMessgaeVisiable2(WebDriver driver) {
-//        WebElement errorMessage =
-//                new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS)
-//                        .until(ExpectedConditions
-//                                .presenceOfElementLocated(By.xpath("//*[@id=\"wizard-errors\"]")));
-//        return errorMessage.isDisplayed();
-//    }
-
-//    public FormPage pickUpTimeIsAfterTheCurrentTime(String pickUpPlace, LocalDate pickUpDate, LocalDate dropOffDate) {
-//        inputPickUpPlace(pickUpPlace);
-//        inputPickUpDate(pickUpDate);
-//        inputDropOffDate(dropOffDate);
-//        searchCar();
-//        return this;
-//    }
-//
-//    public FormPage searchWithEmptyPickUpField(String EmptyPickUpPlace, LocalDate pickUpDate) {
-//        inputPickUpPlace(EmptyPickUpPlace);
-//        inputPickUpDate(pickUpDate);
-//        inputDropOffDate(pickUpDate);
-//        searchCar();
-//        return this;
-//    }
-
+    public boolean checkloginErrorMessage(PageError error) {
+        return loginError.isDisplayed()
+                && loginError.getText().
+                contains(error.getErrorDescription());
+    }
 }

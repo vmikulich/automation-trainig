@@ -5,7 +5,7 @@ https://www.expedia.com/Cars
    Шаги:
      1) Пользователь нажимает на вкладку "Account" и выбирает "Sign up" на странице сайта
      2) Открывается окно входа на сайт
-     3) Пользователь вводит недействительный e-mail "notexist@gmail.com" и пароль "223"
+     3) Пользователь вводит недействительный e-mail "notexist@gmail.com" и пароль "qwety123"
      4) Пользователь нажимает кнопку "Sign In"
    Результат: Выводится сообщение о том, что был введен неправильный e-mail или пароль ("You may have entered 
    an unknown email address or an incorrect password").

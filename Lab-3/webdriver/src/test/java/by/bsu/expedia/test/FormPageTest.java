@@ -1,7 +1,9 @@
 package by.bsu.expedia.test;
 
+import by.bsu.expedia.model.Account;
 import by.bsu.expedia.model.PageError;
 import by.bsu.expedia.page.FormPage;
+import by.bsu.expedia.service.AccountCreator;
 import by.bsu.expedia.service.CarReservationCreator;
 import by.bsu.expedia.service.PageErrorCreator;
 import org.testng.Assert;
@@ -60,6 +62,15 @@ public class FormPageTest extends CommonConditions {
         page.openPage().fillFromParams(CarReservationCreator.withPickUpAndReturnPlacesAcrossContinentsFromProperty()).search();
         PageError expectedError = PageErrorCreator.errorForPickUpAndReturnPlacesAcrossContinentsFromProperty();
         Assert.assertTrue(page.checkPickUpAndReturnPlacesAcrossContinentsErrorMessage(expectedError));
+    }
+
+    @Test(testName = "testcase 7: Login with not registered email")
+    public void loginWithNotRegisteredEmailTest() {
+        Account testAccount = AccountCreator.withNotRegisteredEmailOrPassword();
+        FormPage page = new FormPage(driver);
+        page.login(testAccount);
+        PageError expectedError = PageErrorCreator.errorForNotRegisteredEmailOrPasswordFromProperty();
+        Assert.assertTrue(page.checkloginErrorMessage(expectedError));
     }
 
 
