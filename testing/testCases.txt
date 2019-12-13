@@ -83,19 +83,17 @@ https://www.expedia.com/Cars
    сменилось на "Hola, Vlad").
 
 
-9) Можно оформить страховку при заполнении формы заказа.
+9) При потытке взять и вернуть автомобиль в местах, далеких друг от друга, появляется сообщение о невозможности выполнения бронирования:
    Предусловия: пользователь находится странице оформления заказа.
    Шаги:
      1) Пользователь вводит данные в форму поиска
-	- Picking up: New York
+	- Picking up: New York, New York
+	- Drop off: Moscow, Russia
 	- Picking-up date: 11/05/2019 10.30 am
 	- Drop-off date: 11/13/2019 7:15pm
      2) Пользователь нажимает кнопку "Search"
-     3) Выбирает первый автомобиль в списке(в моём случае "Premium")
-     4) Выбираем пункт о страховке
-     5) Нажимаем Reserv Now
-  Результат: на вашу почту должно прийти письмо и уведомить вас об успешном оформлении страховки.
-  Текст письма: "Add collision damage protection for your rental car".
+  Результат: Выводится сообщение "Sorry, there are no cars available for the selected pick-up location to the selected drop-off location.
+  Please try searching different pick-up or drop-off locations to find available cars for your trip."
 
 
 10) Автомобили можно отсортировать.
