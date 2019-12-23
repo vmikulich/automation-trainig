@@ -65,37 +65,37 @@ public class FormPage extends AbstractPage{
     @FindBy(xpath = "[@id=\"wizard-errors\"]/div/ul/li/a")
     private WebElement pickUpTimeError;
 
-    @FindBy(xpath = "[@id=\"gcw-cars-form-clp\"]/div[2]/div/ul/li/a")
+    @FindBy(xpath = "//*[@id=\"gcw-cars-form-clp\"]/div[2]/div/ul/li[1]/a")
     private WebElement emptyPickUpPlaceFieldError;
 
-    @FindBy(xpath = "[@id=\"gcw-cars-form-clp\"]/div[2]/div/ul/li[2]/a")
+    @FindBy(xpath = "//*[@id=\"gcw-cars-form-clp\"]/div[2]/div/ul/li[2]/a")
     private WebElement emptyPickUpDateFieldError;
 
-    @FindBy(xpath = "[@id=\"gcw-cars-form-clp\"]/div[2]/div/ul/li[3]/a")
+    @FindBy(xpath = "//*[@id=\"gcw-cars-form-clp\"]/div[2]/div/ul/li[3]/a")
     private WebElement emptyDropOffDateFieldError;
 
-    @FindBy(xpath = "[@id=\"gcw-cars-form-clp\"]/div[2]/div/ul/li/a")
+    @FindBy(xpath = "//*[@id=\"gcw-cars-form-clp\"]/div[2]/div/ul/li/a")
     private WebElement equalityOfPickupAndDropOffTimeError;
 
-    @FindBy(xpath = "[@id=\"ember906\"]/div/h5")
+    @FindBy(xpath = "//*[@id=\"ember906\"]/div/h5")
     private WebElement InexistentPickUpPlaceError;
 
-    @FindBy(xpath = "[@id=\"ember906\"]/div/h5")
+    @FindBy(xpath = "//*[@id=\"ember906\"]/div/h5")
     private WebElement pickUpAndReturnPlacesAcrossContinentsError;
 
-    @FindBy(xpath = "[@id=\"gss-signin-incorrect-email-or-password\"]")
+    @FindBy(xpath = "//*[@id=\"gss-signin-incorrect-email-or-password\"]")
     private WebElement loginError;
 
-    @FindBy(xpath = "[@id=\"header-account-menu\"]")
+    @FindBy(xpath = "//*[@id=\"header-account-menu\"]")
     private WebElement accountButton;
 
-    @FindBy(xpath = "[@id=\"account-signin\"]")
+    @FindBy(xpath = "//*[@id=\"account-signin\"]")
     private WebElement signInButton;
 
-    @FindBy(xpath = "[@id=\"gss-signin-email\"]")
+    @FindBy(xpath = "//*[@id=\"gss-signin-email\"]")
     private WebElement emailInput;
 
-    @FindBy(xpath = "[@id=\"gss-signin-password\"]")
+    @FindBy(xpath = "//*[@id=\"gss-signin-password\"]")
     private WebElement passwordInput;
 
     @FindBy(xpath = "//*[@id=\"gss-signin-submit\"]")
@@ -105,6 +105,7 @@ public class FormPage extends AbstractPage{
     public void search() {
         searchButton.click();
         LOGGER.info("Searching...");
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
     }
 
     public FormPage fillFromParams(CarReservation params) {
@@ -133,7 +134,7 @@ public class FormPage extends AbstractPage{
         pickUpPlace.sendKeys(place);
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         LOGGER.info("Filled 'Pick-up place' field with " + place);
-        focusAway();
+//        focusAway();
         return this;
     }
 
@@ -157,10 +158,11 @@ public class FormPage extends AbstractPage{
 
     private FormPage inputDropOffDate(String date) {
         dropOffDate.clear();
+        dropOffDate.clear();
         dropOffDate.sendKeys(date);
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         LOGGER.info("Filled 'Pick-up date' field with " + date);
-        focusAway();
+//        focusAway();
         return this;
     }
 

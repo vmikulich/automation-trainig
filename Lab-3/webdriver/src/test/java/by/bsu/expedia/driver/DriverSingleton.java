@@ -19,19 +19,30 @@ public class DriverSingleton {
 
     public static WebDriver getDriver() {
         if (null == driver) {
-            switch (System.getProperty(SYSTEM_PROPERTY_BROWSER)) {
-                case SYSTEM_PROPERTY_BROWSER_CHROME: {
-                    WebDriverManager.firefoxdriver().setup();
-                    driver = new ChromeDriver();
-                    LOGGER.info("Created Firefox driver");
-                }
-                default: {
-                    WebDriverManager.edgedriver().setup();
-                    driver = new EdgeDriver();
-                    LOGGER.info("Created Edge driver");
-
-                }
+            String browser = System.getProperty(SYSTEM_PROPERTY_BROWSER);
+            if (browser == SYSTEM_PROPERTY_BROWSER_CHROME) {
+                WebDriverManager.firefoxdriver().setup();
+                driver = new ChromeDriver();
+                LOGGER.info("Created Firefox driver");
+            } else {
+                WebDriverManager.edgedriver().setup();
+                driver = new EdgeDriver();
+                LOGGER.info("Created Edge driver");
             }
+//            switch (System.getProperty(SYSTEM_PROPERTY_BROWSER)) {
+//                case SYSTEM_PROPERTY_BROWSER_CHROME: {
+//                    WebDriverManager.firefoxdriver().setup();
+//                    driver = new ChromeDriver();
+//                    LOGGER.info("Created Firefox driver");
+//                }
+//                default: {
+//                    System.out.println("zhp[a");
+//                    WebDriverManager.edgedriver().setup();
+//                    driver = new EdgeDriver();
+//                    LOGGER.info("Created Edge driver");
+//
+//                }
+//            }
             driver.manage().window().maximize();
         }
         return driver;

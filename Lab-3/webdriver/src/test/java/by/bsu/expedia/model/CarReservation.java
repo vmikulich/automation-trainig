@@ -7,6 +7,8 @@ public class CarReservation {
     private String pickUpPlace;
     private String dropOffPlace;
     private ReservationDates reservationDates;
+    private String pickUpDate;
+    private String dropOffDate;
 
     public CarReservation(String placeFrom,
                           String placeTo,
@@ -35,6 +37,24 @@ public class CarReservation {
     public CarReservation setPlaceTo(String placeTo) {
         this.dropOffPlace = placeTo;
         return this;
+    }
+
+    public CarReservation setPickUpDate(String pickUpDate) {
+        this.pickUpDate = pickUpDate;
+        return this;
+    }
+
+    public Optional<String> getPickUpDate() {
+        return Optional.ofNullable(pickUpDate);
+    }
+
+    public CarReservation setDropOffDate(String dropOffDate) {
+        this.dropOffDate = dropOffDate;
+        return this;
+    }
+
+    public Optional<String> getDropOffDate() {
+        return Optional.ofNullable(dropOffDate);
     }
 
     public Optional<ReservationDates> getReservationDates() {
